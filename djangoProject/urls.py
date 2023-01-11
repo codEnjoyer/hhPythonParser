@@ -16,10 +16,17 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from myapp1 import views
+from rest_framework.routers import SimpleRouter
 
+from myapp1.views import ExampleView
+
+router = SimpleRouter()
+router.register("api/vacancies", ExampleView)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index_page, name='home'),
     path('about/', views.about_page, name='about')
 ]
+
+urlpatterns += router.urls

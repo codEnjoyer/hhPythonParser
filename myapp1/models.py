@@ -9,4 +9,4 @@ class Vacancy(models.Model):
     salary = models.IntegerField(default=0)
 
     def __str__(self):
-        return f"{self.second_name} {self.name}"
+        return f"{self.second_name} {self.name}, {self.salary}"
