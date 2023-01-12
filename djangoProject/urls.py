@@ -17,7 +17,8 @@ from django.contrib import admin
 from django.urls import path
 from myapp1 import views
 from rest_framework.routers import SimpleRouter
-
+from django.conf import settings
+from django.conf.urls.static import static
 from myapp1.views import ExampleView
 
 router = SimpleRouter()
@@ -25,8 +26,13 @@ router.register("api/vacancies", ExampleView)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index_page, name='home'),
-    path('about/', views.about_page, name='about')
+    path('', views.index_page, name='main'),
+    path('relevance/', views.relevance_page, name='relevance'),
+    path('geography/', views.geography_page, name='geography'),
+    path('skills/', views.skills_page, name='skills'),
+    path('recent-vacancies/', views.recent_vacancies_page, name='recent-vacancies'),
+    path('vue/', views.vue_page, name='vue')
 ]
 
 urlpatterns += router.urls
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

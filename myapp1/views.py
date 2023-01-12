@@ -14,11 +14,22 @@ def index_page(request: WSGIRequest) -> render:
     # for vac in vacancies:
     #     print(f"ID = {vac.id}, Фамилия = {vac.second_name}, Имя = {vac.name}, Запрлата = {vac.salary}")
 
-    return render(request, 'index.html', {"vacancies": vacancies})
+    return render(request, 'main.html', {"vacancies": vacancies})
 
+def relevance_page(request: WSGIRequest) -> render:
+    return render(request, 'relevance.html')
 
-def about_page(request: WSGIRequest) -> render:
-    return render(request, 'about.html')
+def geography_page(request: WSGIRequest) -> render:
+    return render(request, 'geography.html')
+
+def skills_page(request: WSGIRequest) -> render:
+    return render(request, 'skills.html')
+
+def recent_vacancies_page(request: WSGIRequest) -> render:
+    return render(request, 'recent vacancies.html')
+
+def vue_page(request: WSGIRequest) -> render:
+    return render(request, "vue.html")
 
 
 class ExampleView(ModelViewSet):
