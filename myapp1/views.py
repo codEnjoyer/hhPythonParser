@@ -1,7 +1,7 @@
 # from django.db.models import QuerySet
 from django.shortcuts import render, redirect
 from django.core.handlers.wsgi import WSGIRequest
-from django.db.models import Q, Avg, Count, ExpressionWrapper, F
+from django.db.models import Q, Avg, Count, F
 # from rest_framework.viewsets import ModelViewSet
 
 from myapp1.forms import VacancyForm
@@ -30,17 +30,34 @@ def relevance_page(request: WSGIRequest) -> render:
                                          prof_count=prof_count, prof_salary=prof_salary)
                                .values('published_at', 'total_count', 'avg_salary', 'prof_count', 'prof_salary')
                                .order_by())
-    context = {
+    data = {
         'header_year': header_year,
         'profession_name': f"{profession_name}",
         'statistics_by_years': statistics_by_years
     }
 
-    return render(request, 'relevance.html', context)
+    return render(request, 'relevance.html', data)
 
 
 def geography_page(request: WSGIRequest) -> render:
-    return render(request, 'geography.html')  # TODO: Написать логику обработки данных
+    profession_name = "Python-разработчик"
+    header = ["Город", "Всего вакансий", "Средняя зарплата", "Доля вакансий"]
+
+    prof_filter = Q(name__icontains=f'{profession_name}') | Q(name__icontains='python') | Q(name__icontains='питон')
+    prof_count = Count('id', filter=prof_filter)
+    statistics_by_cities = list(Vacancy.objects
+                                .values('area_name')
+                                .annotate(total_count=Count('id'),
+                                          avg_salary=Avg('salary'),
+                                          prof_count=prof_count)
+                                .values('area_name', 'total_count', 'avg_salary', 'prof_count')
+                                .order_by('-prof_count')[:10]) # TODO: Перевод в проценты
+    data = {
+        "profession_name": profession_name,
+        "header_city": header,
+        "statistics_by_cities": statistics_by_cities
+    }
+    return render(request, 'geography.html', data)
 
 
 def skills_page(request: WSGIRequest) -> render:
