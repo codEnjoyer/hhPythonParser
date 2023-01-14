@@ -1,7 +1,7 @@
 # from django.db.models import QuerySet
 from django.shortcuts import render, redirect
 from django.core.handlers.wsgi import WSGIRequest
-from django.db.models import Q
+from django.db.models import Q, Avg, Count, ExpressionWrapper, F
 # from rest_framework.viewsets import ModelViewSet
 
 from myapp1.forms import VacancyForm
@@ -14,20 +14,27 @@ from myapp1.models import Vacancy
 # Create your views here.
 
 def index_page(request: WSGIRequest) -> render:
-    vacancies = Vacancy.objects.filter(Q(name__icontains='python-программист') | Q(name__icontains='пайтон')
-                                       | Q(name__icontains='python') | Q(name__icontains='пайтон'))
-
-    return render(request, 'main.html', {'vacancies': vacancies})
+    return render(request, 'main.html')
 
 
 def relevance_page(request: WSGIRequest) -> render:
     profession_name = "Python-разработчик"
     header_year = ["Год", "Средняя зарплата", f"Средняя зарплата - {profession_name}", "Количество вакансий",
                    f"Количество вакансий - {profession_name}"]
-    # context = {'salary_data': zip(salary_data,
+    prof_filter = Q(name__icontains=f'{profession_name}') | Q(name__icontains='python') | Q(name__icontains='питон')
+    prof_count = Count('id', filter=prof_filter)
+    prof_salary = Avg('salary', filter=prof_filter)
+    statistics_by_years = list(Vacancy.objects
+                               .values('published_at')
+                               .annotate(total_count=Count('id'), avg_salary=Avg('salary'),
+                                         prof_count=prof_count, prof_salary=prof_salary)
+                               .values('published_at', 'total_count', 'avg_salary', 'prof_count', 'prof_salary')
+                               .order_by())
     context = {
         'header_year': header_year,
-        'profession_name': f"{profession_name}"}
+        'profession_name': f"{profession_name}",
+        'statistics_by_years': statistics_by_years
+    }
 
     return render(request, 'relevance.html', context)
 

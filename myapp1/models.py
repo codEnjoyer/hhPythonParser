@@ -9,7 +9,7 @@ class Vacancy(models.Model):
     key_skills = models.CharField(max_length=255, blank=True, null=True, default='')
     salary = models.IntegerField(blank=True, null=True, default=0)
     area_name = models.CharField(max_length=100, blank=False, null=False, default='')
-    published_at = models.CharField(max_length=10, blank=False, null=False, default='')
+    published_at = models.IntegerField(blank=False, null=False, default=0)
 
     class Meta:
         verbose_name = "Vacancy"

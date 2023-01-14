@@ -6,7 +6,7 @@
 
 {% block main_content %}
     <h1>Аналитика зарплат по годам для профессии {{ profession_name }}</h1>
-    <img src="{% static 'myapp1/img/graphs/years_graph.png' %}" alt="">
+{#    <img src="{% static 'myapp1/img/graphs/years_graph.png' %}" alt="">#}
     <h2>Статистика по годам</h2>
     <table>
         <colgroup>
@@ -23,24 +23,31 @@
                 </th>
             {% endfor %}
         </tr>
-{#        {% for year, salary, count, salary_vac, count_vac in salary_data.items %}#}
-{#            <tr>#}
-{#                <td>#}
-{#                    {{ year }}#}
-{#                </td>#}
-{#                <td>#}
-{#                    {{ salary }}#}
-{#                </td>#}
-{#                <td>#}
-{#                    {{ salary_vac }}#}
-{#                </td>#}
-{#                <td>#}
-{#                    {{ count }}#}
-{#                </td>#}
-{#                <td>#}
-{#                    {{ count_vac }}#}
-{#                </td>#}
-{#            </tr>#}
-{#        {% endfor %}#}
+{#        <tr>#}
+{#            {{ statistics_by_years }}#}
+{#        </tr>#}
+        {% for year in statistics_by_years %}
+            <tr>
+                <td>
+                    {{ year.published_at }}
+                </td>
+                <td>
+                    {{ year.avg_salary|floatformat:'0' }}
+                </td>
+                <td>
+                    {% if year.prof_salary %}
+                        {{ year.prof_salary|floatformat:'0' }}
+                    {% else %}
+                        0
+                    {% endif %}
+                </td>
+                <td>
+                    {{ year.total_count }}
+                </td>
+                <td>
+                    {{ year.prof_count }}
+                </td>
+            </tr>
+        {% endfor %}
     </table>
 {% endblock %}
