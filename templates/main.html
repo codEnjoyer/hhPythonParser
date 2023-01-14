@@ -5,13 +5,24 @@
 {% endblock %}
 
 {% block main_content %}
-    <h1>Hello, World!</h1>
-    {% for vacancy in vacancies %}
-        <div class="btn btn-success btn-lg">
-            Vacancy: {{ vacancy }}
-        </div>
-        <br>
-    {% endfor %}
+    <div class="features">
+        <h1>Hello, World!</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam asperiores debitis enim esse est et impedit
+            inventore modi molestiae mollitia neque, nobis non numquam quas quis sint suscipit unde voluptate.
+        </p>
+        <div class="btn btn-success btn-lg">Ну нажимай, чё смотришь</div><br>
+
+    </div>
+        <p class="hihihi">
+            {% for vacancy in vacancies %}
+                {{ vacancy }}
+            {% endfor %}
+        </p>
+
+{#            <div class="btn btn-success btn-lg">#}
+{#                Vacancy: {{ vacancy }}#}
+{#            </div>#}
+
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
             crossorigin="anonymous"></script>

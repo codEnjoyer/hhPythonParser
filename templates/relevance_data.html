@@ -1,0 +1,46 @@
+{#{% extends 'layout.html' %}#}
+{% load static %}
+
+{#{% block head_content %}#}
+{#{% endblock %}#}
+
+{% block main_content %}
+    <h1>Аналитика зарплат по годам для профессии {{ profession_name }}</h1>
+    <img src="{% static 'myapp1/img/graphs/years_graph.png' %}" alt="">
+    <h2>Статистика по годам</h2>
+    <table>
+        <colgroup>
+            <col style="width: 10%">
+            <col style="width: 15%">
+            <col style="width: 30%">
+            <col style="width: 15%">
+            <col style="width: 30%">
+        </colgroup>
+        <tr>
+            {% for header in header_year %}
+                <th>
+                    {{ header }}
+                </th>
+            {% endfor %}
+        </tr>
+{#        {% for year, salary, count, salary_vac, count_vac in salary_data.items %}#}
+{#            <tr>#}
+{#                <td>#}
+{#                    {{ year }}#}
+{#                </td>#}
+{#                <td>#}
+{#                    {{ salary }}#}
+{#                </td>#}
+{#                <td>#}
+{#                    {{ salary_vac }}#}
+{#                </td>#}
+{#                <td>#}
+{#                    {{ count }}#}
+{#                </td>#}
+{#                <td>#}
+{#                    {{ count_vac }}#}
+{#                </td>#}
+{#            </tr>#}
+{#        {% endfor %}#}
+    </table>
+{% endblock %}
