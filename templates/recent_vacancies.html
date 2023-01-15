@@ -5,41 +5,52 @@
 {% endblock %}
 
 {% block main_content %}
-    <table>
-        <thead>
-        {% for header in headers %}
-            <th>
-                {{ header }}
-            </th>
-        {% endfor %}
-        </thead>
-        <tbody>
-        {% for vac in vacancies %}
-            <tr>
-                <td>
-                    {{ vac.name }}
-                </td>
-                <td>
-                    {{ vac.description|truncatechars:200 }}
-                </td>
-                <td>
-                    {{ vac.key_skills }}
-                </td>
-                <td>
-                    {{ vac.salary }}
-                </td>
-                <td>
-                    {{ vac.company }}
-                </td>
-                <td>
-                    {{ vac.area_name }}
-                </td>
-                <td>
-                    {{ vac.published_at }}
-                </td>
-            </tr>
+    <div class="container">
+        <table class="table">
+            <colgroup>
+                <col style="width: 10%">
+                <col style="width: 40%">
+                <col style="width: 15%">
+                <col style="width: 9%">
+                <col style="width: 7%">
+                <col style="width: 9%">
+                <col style="width: 9%">
+            </colgroup>
+            <thead>
+            {% for header in headers %}
+                <th>
+                    {{ header }}
+                </th>
+            {% endfor %}
+            </thead>
+            <tbody>
+            {% for vac in vacancies %}
+                <tr>
+                    <td>
+                        {{ vac.name }}
+                    </td>
+                    <td>
+                        {{ vac.description|truncatechars:200 }}
+                    </td>
+                    <td>
+                        {{ vac.key_skills }}
+                    </td>
+                    <td>
+                        {{ vac.company }}
+                    </td>
+                    <td>
+                        {{ vac.salary }}
+                    </td>
+                    <td>
+                        {{ vac.area_name }}
+                    </td>
+                    <td>
+                        {{ vac.published_at }}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
-        {% endfor %}
-        </tbody>
-    </table>
 {% endblock %}

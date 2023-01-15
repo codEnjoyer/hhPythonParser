@@ -26,71 +26,86 @@ def index_page(request: WSGIRequest) -> render:
 
 
 def relevance_page(request: WSGIRequest) -> render:
-    profession_name = "Python-разработчик"
-    header_year = ["Год", "Средняя зарплата", f"Средняя зарплата - {profession_name}", "Количество вакансий",
-                   f"Количество вакансий - {profession_name}"]
-    prof_filter = Q(name__icontains=f'{profession_name}') | Q(name__icontains='python') | Q(name__icontains='питон')
-    prof_count = Count('id', filter=prof_filter)
-    prof_salary = Avg('salary', filter=prof_filter)
-    statistics_by_years = list(Vacancy.objects
-                               .values('published_at')
-                               .annotate(total_count=Count('id'), avg_salary=Avg('salary'),
-                                         prof_count=prof_count, prof_salary=prof_salary)
-                               .values('published_at', 'total_count', 'avg_salary', 'prof_count', 'prof_salary')
-                               .order_by('-published_at'))
+    prerender = True
     data = {
-        'header_year': header_year,
-        'profession_name': f"{profession_name}",
-        'statistics_by_years': statistics_by_years
+        'prerender': prerender
     }
-
+    if not prerender:
+        profession_name = "Python-разработчик"
+        header_year = ["Год", "Средняя зарплата", f"Средняя зарплата - {profession_name}", "Количество вакансий",
+                       f"Количество вакансий - {profession_name}"]
+        prof_filter = Q(name__icontains=f'{profession_name}') | Q(name__icontains='python') | Q(name__icontains='питон')
+        prof_count = Count('id', filter=prof_filter)
+        prof_salary = Avg('salary', filter=prof_filter)
+        statistics_by_years = list(Vacancy.objects
+                                   .values('published_at')
+                                   .annotate(total_count=Count('id'), avg_salary=Avg('salary'),
+                                             prof_count=prof_count, prof_salary=prof_salary)
+                                   .values('published_at', 'total_count', 'avg_salary', 'prof_count', 'prof_salary')
+                                   .order_by('-published_at'))
+        data.update({
+            'header_year': header_year,
+            'profession_name': f"{profession_name}",
+            'statistics_by_years': statistics_by_years
+        })
     return render(request, 'relevance.html', data)
 
 
 def geography_page(request: WSGIRequest) -> render:
-    profession_name = "Python-разработчик"
-    header = ["Город", "Всего вакансий", "Средняя зарплата", f"Вакансий {profession_name}"]
-
-    prof_filter = Q(name__icontains=f'{profession_name}') | Q(name__icontains='python') | Q(name__icontains='питон')
-    prof_count = Count('id', filter=prof_filter)
-    statistics_by_cities = list(Vacancy.objects
-                                .values('area_name')
-                                .annotate(total_count=Count('id'),
-                                          avg_salary=Avg('salary'),
-                                          prof_count=prof_count)
-                                .values('area_name', 'total_count', 'avg_salary', 'prof_count')
-                                .order_by('-prof_count')[:10])
+    prerender = True
     data = {
-        "profession_name": profession_name,
-        "header_city": header,
-        "statistics_by_cities": statistics_by_cities
+        'prerender': prerender
     }
+    if not prerender:
+        profession_name = "Python-разработчик"
+        header = ["Город", "Всего вакансий", "Средняя зарплата", f"Вакансий {profession_name}"]
+
+        prof_filter = Q(name__icontains=f'{profession_name}') | Q(name__icontains='python') | Q(name__icontains='питон')
+        prof_count = Count('id', filter=prof_filter)
+        statistics_by_cities = list(Vacancy.objects
+                                    .values('area_name')
+                                    .annotate(total_count=Count('id'),
+                                              avg_salary=Avg('salary'),
+                                              prof_count=prof_count)
+                                    .values('area_name', 'total_count', 'avg_salary', 'prof_count')
+                                    .order_by('-prof_count')[:10])
+        data.update({
+            "profession_name": profession_name,
+            "header_city": header,
+            "statistics_by_cities": statistics_by_cities
+        })
     return render(request, 'geography.html', data)
 
 
 def skills_page(request: WSGIRequest) -> render:
-    all_skills = Vacancy.objects.exclude(key_skills=None).values('key_skills', 'published_at')
-    skills_by_year = {}
-    for c_skill in all_skills:
-        year = c_skill["published_at"]
-        if year not in skills_by_year.keys():
-            skills_by_year[year] = c_skill["key_skills"].split('\n')
-        else:
-            skills_by_year[year].extend(c_skill["key_skills"].split('\n'))
-
-    for year, skills in skills_by_year.items():
-        c = Counter(skills)
-        skills_by_year[year] = [(name, c[name] / len(skills) * 100.0) for name, count in c.most_common(10)]
-
+    prerender = True
     data = {
-        "skills_by_year": dict(sorted(skills_by_year.items(), reverse=True))
+        "prerender": prerender
     }
+    if not prerender:
+        header = ["Год", "Навыки"]
+        all_skills = Vacancy.objects.exclude(key_skills=None).values('key_skills', 'published_at')
+        skills_by_year = {}
+        for c_skill in all_skills:
+            year = c_skill["published_at"]
+            if year not in skills_by_year.keys():
+                skills_by_year[year] = c_skill["key_skills"].split('\n')
+            else:
+                skills_by_year[year].extend(c_skill["key_skills"].split('\n'))
+
+        for year, skills in skills_by_year.items():
+            c = Counter(skills)
+            skills_by_year[year] = [(name, c[name] / len(skills) * 100.0) for name, count in c.most_common(10)]
+        data.update({
+            "skills_by_year": dict(sorted(skills_by_year.items(), reverse=True)),
+            'headers': header
+        })
     return render(request, 'skills.html', data)
 
 
 def recent_vacancies_page(request: WSGIRequest) -> render:
     header = ["Название", "Описание", "Навыки", "Компания", "Оклад", "Название региона", "Дата публикации"]
-    date_from = datetime.datetime(year=2022, month=12, day=15)
+    date_from = datetime.datetime(year=2022, month=12, day=12)
     max_vacancies_count = 10
     vacancies = Parser(date_from, max_vacancies_count).vacancies.to_dict(orient='records')
     data = {
@@ -217,7 +232,7 @@ def get_vacancies(date_from: datetime.datetime, date_to: datetime.datetime, max_
         columns=["name", "description", "key_skills", "salary_from", "salary_to", "salary_currency", "company",
                  "area_name", "published_at"])
 
-    parsing_iterations = 30  # ceil(max_vacancies_count / (per_page * pages))
+    parsing_iterations = 20  # ceil(max_vacancies_count / (per_page * pages))
     timedelta = date_to - date_from
     n_hours = timedelta.days * 24 + timedelta.seconds / 3600
     time_chunk = ceil(n_hours / parsing_iterations)
@@ -231,7 +246,8 @@ def get_vacancies(date_from: datetime.datetime, date_to: datetime.datetime, max_
 
         for page in range(pages):
             params = {
-                'text': 'python-разработчик OR python-developer OR специалист-python OR python OR питон',
+                'text': 'python-разработчик OR python-developer OR специалист-python OR python OR питон OR пайтон',
+                'search_field': "name",
                 'per_page': per_page,
                 'page': page,
                 'specialization': 1,
