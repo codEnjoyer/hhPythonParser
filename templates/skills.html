@@ -4,3 +4,11 @@
 <title>Навыки</title>
 {% endblock %}
 
+{% block main_content %}
+{#    {{ skills_by_year }}#}
+    {% for year, skills in skills_by_year.items %}
+        <p>{{ year }} : {% for skill, count in skills %}{{ skill }} - {{ count|floatformat:"2" }}%, {% endfor %}</p>
+    {% endfor %}
+
+    <p>Проценты указаны по отношению к числу всех навыков за выбранный год</p>
+{% endblock %}
