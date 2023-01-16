@@ -23,9 +23,9 @@ class VacancyForm(ModelForm):
                 'class': 'form-control',
                 'placeholder': 'Город'
             }),
-            'published_at': TextInput(attrs={
+            'published_at': NumberInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Год-месяц'
+                'placeholder': 'Год'
             })
         }
 
@@ -36,8 +36,7 @@ class HHForm(ModelForm):
         fields = ["date"]
         widgets = {
             "date": DateTimeInput(attrs={
-                'class': 'form-control',
-                'placeholder': "Выберите дату",
+                'class': 'form-control custom-date-control',
                 'id': 'date_day',
                 'type': 'date'
             })

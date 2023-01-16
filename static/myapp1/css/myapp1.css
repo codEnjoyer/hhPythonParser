@@ -6,10 +6,6 @@
     --orange: #FFC600;
 }
 
-body {
-    /*background:#;*/
-}
-
 .flex {
     display: flex;
 }
@@ -29,11 +25,13 @@ a i {
 
 .menu {
     position: fixed;
+    height: 100vh;
+    max-height: 100vh;
+    max-width: 400px;
     float: left;
+    margin: auto 0;
     padding: 2%;
     background: #232323;
-    width: 30%;
-    height: 100vh;
 }
 
 h1, h2, h3, h4 {
@@ -46,23 +44,50 @@ h1, h2, h3, h4 {
     font-weight: bold;
     position: relative;
     top: -20px;
+}
+
+.logo-title {
     color: var(--yellow);
 }
 
 .aside-navigation h3 {
     margin-bottom: 5%;
     text-align: center;
-    color: var(--blue)
+    color: antiquewhite;
 }
 
 .container-custom {
+    width: calc(100% - 400px);
     float: right;
-    padding-top: 2%;
+    padding: 2%;
     text-align: center;
-    max-width: 70%;
 }
 
-.container-custom h2, h3 {
+.container-custom h2, h3, h4, h5 {
     margin-bottom: 2%;
 }
 
+.relevance-graph, .cities-graph {
+    max-width: 100%;
+}
+
+.skills-table td {
+    vertical-align: middle;
+}
+
+.table-footnote {
+    text-align: right;
+}
+
+.custom-date-control {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.add-vacancy-button {
+    background-color: palegreen;
+}
+
+.add-vacancy-button:hover {
+    background-color: lightgreen;
+}

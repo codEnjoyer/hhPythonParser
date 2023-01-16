@@ -4,16 +4,12 @@
 {% endblock %}
 
 {% block main_content %}
-    {#    <img src="{% static 'myapp1/img/{{ image_file }}' %}" {{ image_style }} alt="">#}
-    <h2>Статистика по городам</h2>
+    <h2>Аналитика зарплат по городам для профессии</h2>
+    <img class="cities-graph" src="{% static 'myapp1/img/graphs/cities_graph.png' %}" alt="">
+    <h4>{{ title }}</h4>
     {% if prerender %}
-        <table class="table">
-            <colgroup>
-                <col style="width: 25%">
-                <col style="width: 25%">
-                <col style="width: 25%">
-                <col style="width: 25%">
-            </colgroup>
+        <table class="table table-striped table-bordered table-hover">
+            <caption>{{ title }}</caption>
             <thead>
             <tr>
 

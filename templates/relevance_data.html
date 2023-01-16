@@ -1,15 +1,13 @@
 {% load static %}
 
-{#{% block head_content %}#}
-{#{% endblock %}#}
-
 {% block main_content %}
     <h2>Аналитика зарплат по годам для профессии {{ profession_name }}</h2>
-    {#    <img src="{% static 'myapp1/img/graphs/years_graph.png' %}" alt="">#}
-    <h3>Статистика по годам</h3>
+    <img class="relevance-graph" src="{% static 'myapp1/img/graphs/years_graph.png' %}" alt="">
+    <h4>{{ title }}</h4>
     {% if prerender %}
-        <table class="table">
-            <thead>
+        <table class="table table-striped table-bordered table-hover">
+            <caption>{{ title }}</caption>
+            <thead class="">
             <tr>
 
                 <th>

@@ -22,13 +22,17 @@ from bs4 import BeautifulSoup
 # Create your views here.
 
 def index_page(request: WSGIRequest) -> render:
-    return render(request, 'main.html')
+    data = {
+        'title': 'Главная страница'
+    }
+    return render(request, 'main.html', data)
 
 
 def relevance_page(request: WSGIRequest) -> render:
     prerender = True
     data = {
-        'prerender': prerender
+        'prerender': prerender,
+        'title': "Статистика по годам"
     }
     if not prerender:
         profession_name = "Python-разработчик"
@@ -54,7 +58,8 @@ def relevance_page(request: WSGIRequest) -> render:
 def geography_page(request: WSGIRequest) -> render:
     prerender = True
     data = {
-        'prerender': prerender
+        'prerender': prerender,
+        'title': "Статистика по городам"
     }
     if not prerender:
         profession_name = "Python-разработчик"
@@ -80,10 +85,11 @@ def geography_page(request: WSGIRequest) -> render:
 def skills_page(request: WSGIRequest) -> render:
     prerender = True
     data = {
-        "prerender": prerender
+        "prerender": prerender,
+        'title': "Навыки"
     }
     if not prerender:
-        header = ["Год", "Навыки"]
+        header = ["Год", 'Навыки']
         all_skills = Vacancy.objects.exclude(key_skills=None).values('key_skills', 'published_at')
         skills_by_year = {}
         for c_skill in all_skills:
