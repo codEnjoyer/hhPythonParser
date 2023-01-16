@@ -1,69 +1,67 @@
-root {
-    --main-color: wheat;
+:root {
+    --yellow: #FFDD51;
+    --blue: #1E96FC;
+    --dark-blue: #072AC8;
+    --grey: #A2D6F9;
+    --orange: #FFC600;
 }
 
-body{
-    background: #cacaca;
+body {
+    /*background:#;*/
 }
 
-aside{
+.flex {
+    display: flex;
+}
+
+.relative {
+    position: relative;
+}
+
+a {
+    color: var(--blue);
+    text-decoration: none;
+}
+
+a i {
+    margin-right: 2%;
+}
+
+.menu {
+    position: fixed;
     float: left;
-    background: #181818;
-    width: 20%;
-    padding: 2.5%;
+    padding: 2%;
+    background: #232323;
+    width: 30%;
     height: 100vh;
-    color: #fff;
-    border-right: 5px solid #4d4d4d;
 }
 
+h1, h2, h3, h4 {
+    margin: 0;
+}
 
-aside .logo{
-    font-size: 40px;
+.logo {
+    padding-top: 5%;
+    align-items: center;
     font-weight: bold;
     position: relative;
     top: -20px;
-    color: var(--main-color)
+    color: var(--yellow);
 }
 
-aside .logo.text{
-    margin-left: 10px;
-    color: #fff;
-}
-
-a{
-    text-decoration: none;
-    color: #B5C5C2;
-}
-
-aside .profession{
-    color: #fff;
-    font-size: 25px;
+.aside-navigation h3 {
+    margin-bottom: 5%;
     text-align: center;
+    color: var(--blue)
 }
 
-aside ul li{
-    list-style: none;
-    margin-top: 15px;
-    transition: all .6s ease;
-}
-
-aside ul li:hover, aside ul a:hover{
-    color: #104E44;
-    transform: scale(1.05);
-}
-
-body .features {
-    float: left;
-    color: #fff;
-    margin-top: 100px;
+.container-custom {
+    float: right;
+    padding-top: 2%;
     text-align: center;
-    width: 75%;
+    max-width: 70%;
 }
 
-body .features h1{font-size: 50px;}
-
-body .features p {max-width: 400px; margin: 20px auto;}
-
-.hihihi {
-    color: var(--main-color)
+.container-custom h2, h3 {
+    margin-bottom: 2%;
 }

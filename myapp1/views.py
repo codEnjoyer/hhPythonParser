@@ -105,7 +105,7 @@ def skills_page(request: WSGIRequest) -> render:
 
 def recent_vacancies_page(request: WSGIRequest) -> render:
     header = ["Название", "Описание", "Навыки", "Компания", "Оклад", "Название региона", "Дата публикации"]
-    date_from = datetime.datetime(year=2022, month=12, day=12)
+    date_from = datetime.datetime(year=2022, month=12, day=10)
     max_vacancies_count = 10
     vacancies = Parser(date_from, max_vacancies_count).vacancies.to_dict(orient='records')
     data = {
@@ -232,7 +232,7 @@ def get_vacancies(date_from: datetime.datetime, date_to: datetime.datetime, max_
         columns=["name", "description", "key_skills", "salary_from", "salary_to", "salary_currency", "company",
                  "area_name", "published_at"])
 
-    parsing_iterations = 20  # ceil(max_vacancies_count / (per_page * pages))
+    parsing_iterations = 100  # ceil(max_vacancies_count / (per_page * pages))
     timedelta = date_to - date_from
     n_hours = timedelta.days * 24 + timedelta.seconds / 3600
     time_chunk = ceil(n_hours / parsing_iterations)
