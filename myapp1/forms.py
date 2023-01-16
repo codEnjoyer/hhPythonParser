@@ -1,5 +1,5 @@
-from myapp1.models import Vacancy
-from django.forms import ModelForm, TextInput, NumberInput
+from myapp1.models import Vacancy, HH
+from django.forms import ModelForm, TextInput, NumberInput, DateTimeInput
 
 
 class VacancyForm(ModelForm):
@@ -26,5 +26,19 @@ class VacancyForm(ModelForm):
             'published_at': TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'Год-месяц'
+            })
+        }
+
+
+class HHForm(ModelForm):
+    class Meta:
+        model = HH
+        fields = ["date"]
+        widgets = {
+            "date": DateTimeInput(attrs={
+                'class': 'form-control',
+                'placeholder': "Выберите дату",
+                'id': 'date_day',
+                'type': 'date'
             })
         }

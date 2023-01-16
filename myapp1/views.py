@@ -4,7 +4,7 @@ from django.core.handlers.wsgi import WSGIRequest
 from django.db.models import Q, Avg, Count
 # from rest_framework.viewsets import ModelViewSet
 
-from myapp1.forms import VacancyForm
+from myapp1.forms import VacancyForm, HHForm
 from myapp1.models import Vacancy
 
 from collections import Counter
@@ -104,13 +104,23 @@ def skills_page(request: WSGIRequest) -> render:
 
 
 def recent_vacancies_page(request: WSGIRequest) -> render:
-    header = ["Название", "Описание", "Навыки", "Компания", "Оклад", "Название региона", "Дата публикации"]
-    date_from = datetime.datetime(year=2022, month=12, day=10)
+    error_message = ""
     max_vacancies_count = 10
-    vacancies = Parser(date_from, max_vacancies_count).vacancies.to_dict(orient='records')
+    vacancies, header = [], []
+    if request.method == "POST":
+        received_form = HHForm(request.POST)
+        if received_form.is_valid():
+            date = received_form.cleaned_data.get('date')
+            header = ["Название", "Описание", "Навыки", "Компания", "Оклад", "Название региона", "Дата публикации"]
+            vacancies = Parser(date, max_vacancies_count).vacancies.to_dict(orient='records')
+        else:
+            error_message = "Неправильно заполненная форма."
+    form = HHForm()
     data = {
         'vacancies': vacancies,
-        'headers': header
+        'headers': header,
+        'error_msg': error_message,
+        'form': form
     }
     return render(request, 'recent_vacancies.html', data)
 

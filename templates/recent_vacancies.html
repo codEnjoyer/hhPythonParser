@@ -5,6 +5,13 @@
 {% endblock %}
 
 {% block main_content %}
+    {{ error_msg }}
+    <form method="post">
+        {% csrf_token %}
+        <label for="date_day">Выберите день</label>
+            {{ form.date }}
+        <button type="submit" class="btn btn-primary">Готово</button>
+    </form>
     <table class="table">
         <colgroup>
             <col style="width: 10%">
