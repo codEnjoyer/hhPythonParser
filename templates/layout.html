@@ -17,57 +17,56 @@
 </head>
 
 <body>
-<div>
-    <header class="menu">
-        <a href="{% url 'home' %}">
-            <div class="logo flex">
-                <img src="{% static 'myapp1/img/python-logo.svg' %}" alt="Логотип Python">
-                <h1 class="logo-title">Python-программист</h1>
-            </div>
-        </a>
-
-        <div class="aside-navigation">
-            <h3 class="">Навигация по сайту</h3>
-            <nav>
-                <ul class="list-group">
-                    <li class="list-group-item list-group-item-action list-group-item relative">
-                        <a class="stretched-link" href="{% url 'home' %}"><i class="fa-solid fa-house"></i>Главная страница
-                        </a>
-                    </li>
-                    <li class="list-group-item list-group-item-action list-group-item">
-                        <a class="stretched-link" href="{% url 'relevance' %}"><i class="fa-solid fa-star"></i>Востребованность
-                        </a>
-                    </li>
-                    <li class="list-group-item list-group-item-action list-group-item">
-                        <a class="stretched-link" href="{% url 'geography' %}"><i
-                                class="fa-solid fa-location-dot"></i>География
-                        </a>
-                    </li>
-                    <li class="list-group-item list-group-item-action list-group-item">
-                        <a class="stretched-link" href="{% url 'skills' %}">
-                            <i class="fa-solid fa-list"></i>Навыки
-                        </a>
-                    </li>
-                    <li class="list-group-item list-group-item-action list-group-item">
-                        <a class="stretched-link" href="{% url 'recent-vacancies' %}"><i
-                                class="fa-solid fa-clock"></i>Последние вакансии
-                        </a>
-                    </li>
-                    <li class="list-group-item list-group-item-action add-vacancy-button">
-                        <a class="stretched-link" href="{% url 'add-vacancy' %}">
-                            <i class="fa-solid fa-plus-circle"></i>Добавить запись
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-
+<header class="menu">
+    <a href="{% url 'home' %}">
+        <div class="logo flex">
+            <img src="{% static 'myapp1/img/python-logo.svg' %}" alt="Логотип Python">
+            <h1 class="logo-title">Python-программист</h1>
         </div>
-    </header>
-    <div class="container-custom">
-        {% block main_content %}
-        {% endblock %}
-    </div>
-</div>
+    </a>
 
+    <div class="aside-navigation">
+        <h3 class="">Навигация по сайту</h3>
+        <nav>
+            <ul class="list-group">
+                <li class="list-group-item list-group-item-action list-group-item relative">
+                    <a class="stretched-link" href="{% url 'home' %}"><i class="fa-solid fa-house"></i>Главная страница
+                    </a>
+                </li>
+                <li class="list-group-item list-group-item-action list-group-item">
+                    <a class="stretched-link" href="{% url 'relevance' %}"><i class="fa-solid fa-star"></i>Востребованность
+                    </a>
+                </li>
+                <li class="list-group-item list-group-item-action list-group-item">
+                    <a class="stretched-link" href="{% url 'geography' %}"><i
+                            class="fa-solid fa-location-dot"></i>География
+                    </a>
+                </li>
+                <li class="list-group-item list-group-item-action list-group-item">
+                    <a class="stretched-link" href="{% url 'skills' %}">
+                        <i class="fa-solid fa-list"></i>Навыки
+                    </a>
+                </li>
+                <li class="list-group-item list-group-item-action list-group-item">
+                    <a class="stretched-link" href="{% url 'recent-vacancies' %}"><i
+                            class="fa-solid fa-clock"></i>Последние вакансии
+                    </a>
+                </li>
+                <li class="list-group-item list-group-item-action add-vacancy-button">
+                    <a class="stretched-link" href="{% url 'add-vacancy' %}">
+                        <i class="fa-solid fa-plus-circle"></i>Добавить запись
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <footer class="footer">
+        <p>Чашкин Никита Андреевич<br>РИ-210941</p>
+    </footer>
+</header>
+<div class="container-custom">
+    {% block main_content %}
+    {% endblock %}
+</div>
 </body>
 </html>

@@ -141,7 +141,7 @@ def add_vacancy(request: WSGIRequest) -> render:
         else:
             error_message = "Неправильно заполненная форма."
 
-    form = VacancyForm()
+    form = VacancyForm(initial={"published_at": None, "salary": None})
     data = {
         'form': form,
         'error_message': error_message

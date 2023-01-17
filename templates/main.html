@@ -1,15 +1,81 @@
 {% extends "layout.html" %}
 
+{% load static %}
+
 {% block head_content %}
     <title>{{ title }}</title>
 {% endblock %}
 
 {% block main_content %}
     <div class="features">
-        <h2>Hello, World!</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam asperiores debitis enim esse est et impedit
-            inventore modi molestiae mollitia neque, nobis non numquam quas quis sint suscipit unde voluptate.
-        </p>
+        <img src="{% static 'myapp1/img/python-main-2.jpg' %}" class="python-main" alt="Python">
+        <h2>О профессии Python-программист</h2>
+        <div class="main-container flex">
+            <p class="main-description">
+                <b>Python-разработчик – это IT-специалист, который участвует в создании сайтов, игр, онлайн-сервисов,
+                    ботов
+                    для соцсетей и другого ПО.</b> Язык программирования Python используется в разных отраслях, но
+                наиболее популярен в следующих направлениях:
+            </p>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><i>Разработка серверной части веб- и мобильных приложений</i></li>
+                <li class="list-group-item"><i>Создание десктопных программ и ПО для различных устройств (от
+                    телекоммуникационного оборудования до банкоматов)</i></li>
+                <li class="list-group-item"><i>Аналитика и визуализация данных</i></li>
+                <li class="list-group-item"><i>Машинное обучение (Machine Learning, Deep Learning)</i></li>
+                <li class="list-group-item"><i>Написание скриптов и парсеров</i></li>
+            </ul>
+            <img src="{% static 'myapp1/img/python-main-1.jpeg' %}" alt="Python code" class="main-description-img">
+            <p class="main-description">
+                Python-программисты занимаются созданием, техподдержкой и доработкой совершенно разных цифровых
+                программ: от сайтов до нейросетей. Ниже подробно расскажем про все, что нужно знать о профессии: знания,
+                навыки, квалификации разработчиков, сферы деятельности и перспективы в карьере.
+            </p>
+            <h4>Питон – это про backend или про frontend</h4>
+            <p class="main-description">
+                Python – это универсальный язык, который используется для реализации разных задач. При желании его можно
+                применять в разработке фронтенда, но в большинстве случаев целесообразнее писать код для внешней
+                (клиентской) части программы на более подходящем языке, например, на JavaScript. <b>Поэтому можно
+                сказать, что Python – это язык для backend-разработки, поскольку он подходит именно для программирования
+                на стороне сервера.</b>
+            </p>
+            <p class="main-description">
+                Backend-разработчик на Python – это специалист, который разрабатывает серверную (внутреннюю, скрытую)
+                часть приложения, и отвечает за внутреннюю архитектуру, логику и взаимодействие с базами данных. Его
+                главная цель – сделать так, чтобы сервисы понимали запросы, а сайты правильно реагировали на действия
+                пользователей. Например, чтобы при нажатии кнопки товар добавлялся в корзину или заявка уходила на
+                рассмотрение.
+            </p>
+            <p class="main-description"><i>Какие задачи решает бэкенд-разработчик:</i></p>
+            <ul class="list-group list-group-flush list-pad">
+                <li class="list-group-item">Продумывает внутренние алгоритмы и процессы</li>
+                <li class="list-group-item">Пишет код на Python</li>
+                <li class="list-group-item">Настраивает связь с базами данных и внешними сервисами</li>
+                <li class="list-group-item">Тестирует итоговый проект</li>
+                <li class="list-group-item">Оптимизирует работу сайта или приложения</li>
+                <li class="list-group-item">Составляет техническую документацию</li>
+            </ul>
+            <h4>Востребованы ли Python-разработчики?</h4>
+            <p class="main-description">
+                <b>Python входит в тройку самых популярных языков программирования на протяжении последних лет.</b>
+                Именно его используют крупные технологические компании, например, Uber, Pinterest, Mozilla, Spotify,
+                Netflix и Asana.
+            </p>
+            <p class="main-description">Питон можно считать одним из наиболее перспективных языков, поскольку его
+                применяют не только в веб-разработке, но и в аналитике данных, машинном обучении и других
+                высокотехнологичных отраслях.
+            </p>
+            <p class="main-description">Чтобы выяснить, насколько востребованы Python-разработчики, мы изучили данные на
+                сайте HeadHunter. На текущий момент опубликовано более 13 000 вакансий для специалистов со знанием языка
+                Питон. Из них:
+            </p>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Почти 1500 – без опыта</li>
+                <li class="list-group-item">Более 6500 – со стажем до 3 лет</li>
+                <li class="list-group-item">Порядка 3000 – с возможностью работать удаленно</li>
+            </ul>
+        </div>
+
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
