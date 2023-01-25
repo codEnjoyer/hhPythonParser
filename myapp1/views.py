@@ -89,8 +89,10 @@ def skills_page(request: WSGIRequest) -> render:
         'title': "Навыки"
     }
     if not prerender:
+        profession_name = "Python-разработчик"
+        prof_filter = Q(name__icontains=f'{profession_name}') | Q(name__icontains='python') | Q(name__icontains='питон')
         header = ["Год", 'Навыки']
-        all_skills = Vacancy.objects.exclude(key_skills=None).values('key_skills', 'published_at')
+        all_skills = Vacancy.objects.exclude(key_skills=None).filter(prof_filter).values('key_skills', 'published_at')
         skills_by_year = {}
         for c_skill in all_skills:
             year = c_skill["published_at"]
