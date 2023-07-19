@@ -1,9 +1,23 @@
-# djangoProject
-Final project of UrFU's python course
+# Итоговый проект по курсу Python от УрФУ на Django
 
-## My first django project! (You can view it by clicking on the link: http://codenjoyer.pythonanywhere.com/)
-### From the main:
-#### There is general information about the profession, a basic visual has been added.
-#### Statistics on the "Python Developer" vacancy have been collected, processed and presented in a readable form.
-#### There is a parsing of this vacancy for any past day with hh.ru
-#### It is possible to add your own vacancy using the form.
+## Описание
+
+Проект представляет собой многостраничный сайт, на котором можно посмотреть статистику по вакансии "Python Developer" за
+любой прошедший
+день с сайта [hh.ru](http://hh.ru/), такую как:
+
+- Средняя зарплата по городам;
+- Топ востребованных навыков;
+- Недавние вакансии;
+- Количество вакансий;
+
+Также есть функционал добавления собственной вакансии через форму.
+
+## Технологии
+
+- Python 3.8
+- Django 4
+- Bootstrap 5
+- Pandas
+- BeautifulSoup
+
